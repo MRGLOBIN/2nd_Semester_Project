@@ -105,3 +105,48 @@ void ClassName::display()
     }
     cout << "Total number of rooms: " << totalRooms << endl;
 }
+/*  function for included classes  */
+
+void InputFileStream::addDepartment()
+{
+    ofstream fout(storageFile, ios::app);
+    string department;
+    int section;
+
+    fout << storageStartDepartment;
+    cout << "\nEnter name for the Department: ";
+    cin >> department;
+    cout << "Enter Section(integer from 1 to 9): ";
+    cin >> section;
+    fout << department << storageNumberCharacter
+         << section << storageEndDepartment;
+    fout.close();
+}
+
+void InputFileStream::addCourse()
+{
+    ofstream fout(storageFile, ios::app);
+    if (!fout)
+        cout << "No such file found";
+    cout << "\nDo you want to add course to this department(y for yes): ";
+    char opinion;
+    cin >> opinion;
+    int hours;
+    while (opinion == 'y' || opinion == 'Y')
+    {
+        cout << "\nEnter course subject name: ";
+        string subject;
+        cin >> subject;
+        cout << "Enter Credit Hoours for current subject(integer From 1 to 9): ";
+        cin >> hours;
+        fout << subject << storageNumberCharacter << hours;
+        cout << "\nDo you want to add antoher subject(y for yes): ";
+        cin >> opinion;
+        if (opinion == 'y' || opinion == 'Y')
+        {
+            fout << storageEndSubjectCharacter;
+        }
+    }
+    fout << storageEndCourseCharacter;
+    fout.close();
+}
